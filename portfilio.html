@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharath Kumar.Portfolio</title>
+    <meta name="description" content="Portfolio of Bharath Kumar - AI & ML Enthusiast, Frontend Engineer, and Full Stack Developer.">
+    <meta property="og:title" content="Bharath Kumar.Portfolio">
+    <meta property="og:description" content="AI/ML Engineer & Full Stack Developer. Explore my projects in Data Analysis, UI Optimization, and AI systems.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1', // Indigo 500
+                        secondary: '#ec4899', // Pink 500
+                        dark: '#0f172a', // Slate 900
+                        light: '#f8fafc', // Slate 50
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .dark .glass {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animation Utilities */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #6366f1, #ec4899);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-light text-slate-800 dark:bg-dark dark:text-slate-200 transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                        Bharath <span class="text-primary">.Portfolio</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium hover:text-primary transition-colors">About</a>
+                    <a href="#skills" class="text-sm font-medium hover:text-primary transition-colors">Skills</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-primary transition-colors">Projects</a>
+                    <a href="#training" class="text-sm font-medium hover:text-primary transition-colors">Training</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-primary transition-colors">Contact</a>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon dark:hidden text-slate-600"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                     <button id="theme-toggle-mobile" class="mr-4 p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <i class="fas fa-moon dark:hidden text-slate-600"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-slate-200 dark:border-slate-700">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary">Projects</a>
+                <a href="#training" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary">Training</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <!-- Particle Canvas Background -->
+        <canvas id="particle-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+        <!-- Background Decor -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary opacity-10 rounded-full blur-3xl animate-pulse z-0"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary opacity-10 rounded-full blur-3xl animate-pulse z-0" style="animation-delay: 1s;"></div>
+
+        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10 relative">
+            <!-- Left Content -->
+            <div class="order-2 lg:order-1 text-center lg:text-left reveal active">
+                <p class="text-primary font-medium mb-2 tracking-wide uppercase text-sm">Portfolio</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-slate-900 dark:text-white leading-tight">
+                    Hi — I’m <br>
+                    <span class="text-gradient">Bharath Kumar</span>
+                </h1>
+                <h2 class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-6">
+                    B.Tech CSE (AI & ML) — SR University | CGPA 8.1/10
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    AI & ML enthusiast and frontend-focused engineer skilled in computer vision, ML pipelines, and data-driven prototypes. Strong background in Vision Transformers, preprocessing automation, and production-friendly ML experimentation.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                    <a href="#contact" class="px-8 py-3 rounded-full bg-primary hover:bg-indigo-600 text-white font-medium transition-all shadow-lg hover:shadow-primary/50 text-center">
+                        Hire Me
+                    </a>
+                    <a href="GUNISETTI_BHARATH_NAGA_SATYA_KUMAR_RESUME.pdf" download class="px-8 py-3 rounded-full border border-slate-300 dark:border-slate-600 hover:border-primary text-slate-700 dark:text-slate-300 hover:text-primary font-medium transition-all flex items-center justify-center gap-2 group">
+                        <span>Download Resume</span>
+                        <i class="fas fa-download group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center justify-center lg:justify-start gap-6">
+                    <a href="https://www.linkedin.com/in/bharath-kumar-b51449299" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-[#0077b5] text-2xl transition-colors" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/bharath506879" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:hover:text-white text-2xl transition-colors" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:bharathgunnisetti53@gmail.com" class="text-slate-500 hover:text-red-500 text-2xl transition-colors" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:9000327188" class="text-slate-500 hover:text-green-500 text-xl transition-colors font-sans font-semibold flex items-center gap-1" aria-label="Phone">
+                         <i class="fas fa-phone-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Avatar -->
+            <div class="order-1 lg:order-2 flex justify-center reveal">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 glass-card">
+                    <!-- Updated with your uploaded image -->
+                    <img 
+                        src="1672059969330.jpg" 
+                        alt="Bharath Kumar Avatar" 
+                        class="w-full h-full rounded-full object-cover shadow-2xl border-4 border-slate-100 dark:border-slate-800"
+                        loading="lazy"
+                        onerror="this.src='https://ui-avatars.com/api/?name=Bharath+Kumar&background=6366f1&color=fff&size=512&font-size=0.33'"
+                    >
+                    <div class="absolute bottom-4 right-4 w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                        <span class="text-2xl">🤖</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="text-3xl font-bold mb-8 text-slate-900 dark:text-white">About</h2>
+            <div class="glass-card p-8 rounded-2xl text-left sm:text-center">
+                <p class="text-lg text-slate-600 dark:text-slate-300 mb-4">
+                    I am a B.Tech CSE (AI & ML) student at SR University (2023–2027) with a fervent passion for AI/ML, Computer Vision, Prompt Engineering, and Frontend & UI Optimization.
+                </p>
+                <p class="text-lg text-slate-600 dark:text-slate-300">
+                    My academic journey is marked by a Certificate of Appreciation for outstanding academic excellence (AIML 2024–25), reflecting my dedication to mastering complex technical concepts and translating them into functional, user-centric solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white reveal">Technical Skills</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                <!-- Category 1 -->
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4 text-primary"><i class="fas fa-code mr-2"></i>Languages & Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Java</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Git</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">GitHub</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">VS Code</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Jupyter</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Kaggle</span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4 text-secondary"><i class="fas fa-brain mr-2"></i>AI / ML / Data</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">PyTorch</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Scikit-learn</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">OpenCV</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Vision Transformer (ViT)</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">SQL / DBMS</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Prompt Engineering</span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4 text-indigo-400"><i class="fas fa-users mr-2"></i>Soft Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Problem-Solving</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Communication</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Research & Presentation</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Time Management</span>
+                        <span class="px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full text-sm">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white reveal">Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col reveal">
+                    <div class="h-2 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Smart Data Analyzer</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+                            Built a web-based data analysis platform to upload, process, and visualize datasets in real time. Designed interactive dashboards and automated insights to simplify data interpretation.
+                        </p>
+                        <div class="mt-auto flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded">HTML/CSS</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded">JavaScript</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded">Chart.js</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="openModal('modal1')" class="text-primary hover:underline text-sm font-medium">View Details</button>
+                            <a href="#" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm"><i class="fab fa-github"></i> Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col reveal" style="transition-delay: 100ms;">
+                    <div class="h-2 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">AI-Based Project Risk Prediction</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+                            Full-stack web application to predict project failure risk using project metrics and GitHub repository data. Implemented a data-driven risk scoring model and real-time analysis.
+                        </p>
+                        <div class="mt-auto flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-semibold px-2 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded">Node.js</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded">Express</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded">MongoDB</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="openModal('modal2')" class="text-primary hover:underline text-sm font-medium">View Details</button>
+                            <a href="#" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm"><i class="fab fa-github"></i> Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col reveal">
+                    <div class="h-2 bg-gradient-to-r from-orange-400 to-red-400"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Dynamic UI Optimizer</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+                            Adaptive UI optimization module that modifies layouts and components based on user behavior and device context. Integrated A/B testing and performance-aware rendering.
+                        </p>
+                        <div class="mt-auto flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-semibold px-2 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded">UI/UX</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded">A/B Testing</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded">JavaScript</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="openModal('modal3')" class="text-primary hover:underline text-sm font-medium">View Details</button>
+                            <a href="#" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm"><i class="fab fa-github"></i> Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col reveal" style="transition-delay: 100ms;">
+                    <div class="h-2 bg-gradient-to-r from-green-400 to-emerald-600"></div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Resume Maker Web Application</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+                            Web-based platform helping users create professional resumes. Features a user-friendly interface, real-time preview, customizable sections, and fast PDF generation.
+                        </p>
+                        <div class="mt-auto flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded">Web Dev</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded">PDF Generation</span>
+                            <span class="text-xs font-semibold px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded">Real-time Preview</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="openModal('modal4')" class="text-primary hover:underline text-sm font-medium">View Details</button>
+                            <a href="#" class="text-slate-500 hover:text-slate-800 dark:hover:text-white text-sm"><i class="fab fa-github"></i> Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Training & Virtual Experience -->
+    <section id="training" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white reveal">Technical Training & Virtual Experience</h2>
+            
+            <div class="space-y-6">
+                <!-- Exp 1 -->
+                <div class="glass-card p-6 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between reveal">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">AIML Virtual Internship</h3>
+                        <p class="text-slate-500 dark:text-slate-400">Technical Training</p>
+                    </div>
+                    <div class="mt-2 sm:mt-0">
+                        <span class="px-4 py-1 rounded-full border border-primary text-primary text-sm font-medium">Jul – Sep 2024</span>
+                    </div>
+                </div>
+
+                <!-- Exp 2 -->
+                <div class="glass-card p-6 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between reveal" style="transition-delay: 100ms;">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Juniper Mist-AI Virtual Internship</h3>
+                        <p class="text-slate-500 dark:text-slate-400">Specialized Training</p>
+                    </div>
+                    <div class="mt-2 sm:mt-0">
+                        <span class="px-4 py-1 rounded-full border border-secondary text-secondary text-sm font-medium">Oct – Dec 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & Achievements Section -->
+    <section id="certifications" class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white reveal">Certifications & Achievements</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                <div class="glass-card p-6 rounded-xl border-l-4 border-yellow-400">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Certificate of Appreciation</h3>
+                    <p class="text-slate-600 dark:text-slate-300">Awarded for Academic Excellence in the AIML Program (2024–25).</p>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl border-l-4 border-blue-400">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Microsoft Certified</h3>
+                    <p class="text-slate-600 dark:text-slate-300">Azure AI Fundamentals (AI-900).</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl border-l-4 border-orange-400">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">AWS Academy Graduate</h3>
+                    <p class="text-slate-600 dark:text-slate-300">Completed training in Cloud Developing through AWS Academy.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl border-l-4 border-purple-400">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Agile Requirements</h3>
+                    <p class="text-slate-600 dark:text-slate-300">Agile Requirements Foundations certification via LinkedIn Learning.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl border-l-4 border-green-400 md:col-span-2">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Smart India Hackathon 2025</h3>
+                    <p class="text-slate-600 dark:text-slate-300">Active Participant in the Internal Smart India Hackathon.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white reveal">Contact</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="space-y-6 reveal">
+                    <h3 class="text-2xl font-semibold text-slate-900 dark:text-white">Get In Touch</h3>
+                    <p class="text-slate-600 dark:text-slate-400">
+                        Interested in collaboration or have a project in mind? Feel free to reach out.
+                    </p>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-primary">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <span class="text-slate-700 dark:text-slate-300">9000327188</span>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-primary">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span class="text-slate-700 dark:text-slate-300 break-all">bharathgunnisetti53@gmail.com</span>
+                    </div>
+
+                    <div class="flex gap-4 mt-6">
+                        <a href="https://www.linkedin.com/in/bharath-kumar-b51449299" target="_blank" class="px-4 py-2 rounded-lg bg-[#0077b5] text-white text-sm hover:opacity-90 transition">
+                            <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/bharath506879" target="_blank" class="px-4 py-2 rounded-lg bg-slate-800 dark:bg-white dark:text-slate-900 text-white text-sm hover:opacity-90 transition">
+                            <i class="fab fa-github mr-2"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="glass-card p-8 rounded-2xl reveal">
+                    <form action="https://formspree.io/f/xbjnqylq" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all dark:text-white">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all dark:text-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all dark:text-white"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-slate-500 dark:text-slate-400 text-sm glass border-t border-slate-200 dark:border-slate-700 mt-12">
+        <p>&copy; 2025 Bharath Kumar. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Modals -->
+    
+    <!-- Project 1 Modal -->
+    <div id="modal1" class="fixed inset-0 z-[100] hidden overflow-y-auto" aria-labelledby="modal-title-1" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal('modal1')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom glass bg-white dark:bg-slate-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                <div class="px-6 py-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4" id="modal-title-1">Smart Data Analyzer</h3>
+                    <div class="text-slate-600 dark:text-slate-300 space-y-4">
+                        <p><strong>Goal:</strong> Simplify data interpretation to support decision-making.</p>
+                        <p><strong>Details:</strong> Built a web-based data analysis platform to upload, process, and visualize datasets in real time. Designed interactive dashboards and automated insights to make raw data visually comprehensible.</p>
+                        <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Chart.js.</p>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900/50 flex justify-end gap-3">
+                    <button type="button" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600" onclick="closeModal('modal1')">Close</button>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600">View Repo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 Modal -->
+    <div id="modal2" class="fixed inset-0 z-[100] hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 text-center">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75" onclick="closeModal('modal2')"></div>
+            <div class="relative inline-block align-bottom glass bg-white dark:bg-slate-800 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                <div class="px-6 py-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">AI-Based Project Risk Prediction System</h3>
+                    <div class="text-slate-600 dark:text-slate-300 space-y-4">
+                        <p><strong>Goal:</strong> Forecast project failures utilizing repository data and analytics.</p>
+                        <p><strong>Details:</strong> Built a full-stack web application to predict project failure risk using project metrics and GitHub repository data. Implemented a data-driven risk scoring model, real-time analysis (commits, issues, contributors), and interactive dashboards for insights. Developed secure authentication.</p>
+                        <p><strong>Tech Stack:</strong> Node.js, Express, MongoDB.</p>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900/50 flex justify-end gap-3">
+                    <button type="button" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white rounded-lg" onclick="closeModal('modal2')">Close</button>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600">View Repo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 Modal -->
+    <div id="modal3" class="fixed inset-0 z-[100] hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 text-center">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75" onclick="closeModal('modal3')"></div>
+            <div class="relative inline-block align-bottom glass bg-white dark:bg-slate-800 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                <div class="px-6 py-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Dynamic UI Optimizer</h3>
+                    <div class="text-slate-600 dark:text-slate-300 space-y-4">
+                        <p><strong>Goal:</strong> Personalize user interfaces in real-time based on behavior to improve usability.</p>
+                        <p><strong>Details:</strong> Created an adaptive UI optimization module that modifies layouts and components based on user behavior and device context. Integrated A/B testing, variant scoring, and performance-aware rendering to deliver personalized UI variants, improving interaction efficiency.</p>
+                        <p><strong>Tech Stack:</strong> UI/UX Optimization, A/B Testing, JavaScript.</p>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900/50 flex justify-end gap-3">
+                    <button type="button" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white rounded-lg" onclick="closeModal('modal3')">Close</button>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600">View Repo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 4 Modal -->
+    <div id="modal4" class="fixed inset-0 z-[100] hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 text-center">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75" onclick="closeModal('modal4')"></div>
+            <div class="relative inline-block align-bottom glass bg-white dark:bg-slate-800 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                <div class="px-6 py-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Resume Maker Web Application</h3>
+                    <div class="text-slate-600 dark:text-slate-300 space-y-4">
+                        <p><strong>Goal:</strong> Enable users to generate structured, professional resumes easily.</p>
+                        <p><strong>Details:</strong> Designed a web-based application to help users create professional and structured resumes with ease. Provides a user-friendly interface, real-time preview, and customizable sections for organizing personal and professional details. Users can generate, edit, and download resumes in PDF format rapidly.</p>
+                        <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, PDF Generation Libraries.</p>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900/50 flex justify-end gap-3">
+                    <button type="button" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white rounded-lg" onclick="closeModal('modal4')">Close</button>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600">View Repo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+
+        // --- Mobile Menu Logic ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Intersection Observer for Animations ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Modal Logic ---
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                document.querySelectorAll('[id^="modal"]').forEach(modal => {
+                    modal.classList.add('hidden');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // --- Particle Animation (Atoms/Neural Network) ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 1.5; // Speed
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            // Adjust number of particles based on screen width
+            const numParticles = window.innerWidth < 768 ? 40 : 80;
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            const isDark = document.documentElement.classList.contains('dark');
+            const particleColor = isDark ? 'rgba(99, 102, 241, 0.6)' : 'rgba(99, 102, 241, 0.4)'; // Primary color
+            const lineColor = isDark ? 'rgba(99, 102, 241, 0.15)' : 'rgba(99, 102, 241, 0.1)';
+
+            ctx.fillStyle = particleColor;
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw connecting lines
+            ctx.lineWidth = 1;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 150) { // Connection distance
+                        ctx.strokeStyle = lineColor;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
