@@ -71,8 +71,8 @@
         /* Animation Utilities */
         .reveal {
             opacity: 0;
-            transform: translateY(60px);
-            transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateY(80px);
+            transition: all 0.8s ease-out;
         }
 
         .reveal.active {
@@ -643,27 +643,38 @@
 
         // --- Intersection Observer for Animations ---
         const observerOptions = {
-            threshold: 0.05,
-            rootMargin: "0px 0px -100px 0px"
+            threshold: 0.1,
+            rootMargin: "0px 0px 0px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('active');
-                    }, 100);
-                    observer.unobserve(entry.target); // Only animate once
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Delay observer setup to ensure DOM is ready
-        setTimeout(() => {
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
+        // Function to setup animations
+        function setupAnimations() {
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => {
+                // Check if already in viewport
+                if (el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().bottom > 0) {
+                    el.classList.add('active');
+                } else {
+                    observer.observe(el);
+                }
             });
-        }, 200);
+        }
+
+        // Setup observer when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupAnimations);
+        } else {
+            setupAnimations();
+        }
 
         // --- Modal Logic ---
         function openModal(modalId) {
